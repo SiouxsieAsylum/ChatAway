@@ -1,0 +1,12 @@
+{
+  "name": "ChatAway",
+  "version": "1.0.0",
+  "description": "Beginners chat application",
+  "main": "server.js",
+  "author": "Andrea McKenzie",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SiouxsieAsylum/ChatAway.git"
+  },
+}
