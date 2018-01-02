@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat Away!</title>
+   <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+      const socket = io();
+
+      window.onload = function(){
+        const form = document.getElementById('form');
+        const username = document.getElementById('username')
+      }
+
+    </script>
+</head>
+<body>
+  <form id="form">
+    <div id="box">
+      <ul id="text-append">
+
+      </ul>
+      <span id="typing"></span>
+    </div>
+    <input type="text" id="username">
+    <input type="text" placeholder="Type Here"><button id="send"></button>
+  </form>
+</body>
+</html>
