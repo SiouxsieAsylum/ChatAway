@@ -2,6 +2,7 @@
 const express = require('express');
 const logger = require('morgan');
 const parser = require('body-parser');
+const path = require('path')
 
 const app = express();
 
@@ -39,12 +40,12 @@ socket.on('connection',function(connection){
   })
 })
 
-
+app.use(express.static(__dirname + '/public'))
 
 // APP PORTS AND ROUTING
 ioServer.listen(3000);
 app.get("/", (req,res,next)=>{
-  res.send('hi')
+  res.render(path.join(__dirname, '/public', 'index.ejs'))
 })
 
 
