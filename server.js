@@ -26,6 +26,7 @@ socket.on('connection',function(connection){
   connection.on('send', function(e){
     console.log(e + 'just happened!')
     connection.emit('message', e)
+    connection.nsp.to(room).emit('message', e)
   })
 
   connection.on('typing', function(e){
