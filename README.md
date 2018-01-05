@@ -1,1 +1,5 @@
 # ChatAway
+## By Andrea McKenzie
+
+----
+

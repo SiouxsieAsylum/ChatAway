@@ -29,7 +29,9 @@ socket.on('connection',function(connection){
   })
 
   connection.on('typing', function(e){
+    console.log('recieving ', e)
     connection.broadcast.emit('typing', e)
+    console.log('broadcasting ', e)
   })
 
   connection.on('disconnect', function(e){
@@ -43,9 +45,17 @@ socket.on('connection',function(connection){
 app.use(express.static(__dirname + '/public'))
 
 // APP PORTS AND ROUTING
-ioServer.listen(3000);
+
 app.get("/", (req,res,next)=>{
   res.render(path.join(__dirname, '/public', 'index.ejs'))
 })
 
+app.get('*', (req,res,err)=>{
+  if (err){
+    console.log(err)
+    res.send(err)
+  }
+})
+
+ioServer.listen(3000);
 

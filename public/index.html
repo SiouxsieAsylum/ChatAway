@@ -9,7 +9,7 @@
       window.onload = function(){
         const form = document.getElementById('form');
         const username = document.getElementById('username');
-        const text = document.getElementById("text")
+        const text = document.getElementById("text");
         const list = document.getElementById('text-append');
         const typing = document.getElementById('typing')
         const timer = 5;
@@ -27,7 +27,8 @@
           text.value = ''
         })
 
-        text.addEventListener('keyup', (e) =>{
+        text.addEventListener('keydown', (e) =>{
+          // console.log('send typing ', e)
           socket.emit('typing', {username: username.value})
         })
 
@@ -39,6 +40,7 @@
         })
 
         socket.on('typing', (e) => {
+          console.log('typing')
           if (timerId){
             clearInterval(timerId)
           }
@@ -56,7 +58,7 @@
       <ul id="text-append">
 
       </ul>
-      <span id="typing"></span>
+      <span id="typing">hi</span>
     </div>
     <input type="text" id="username">
     <input type="text" id="text" placeholder="Type Here"><button type="submit" id="send">Send</button>
