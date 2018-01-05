@@ -1,0 +1,33 @@
+*{
+  box-sizing: border-box;
+}
+
+input, button{
+  height: 10vh
+}
+
+#username{
+  width: 20vw;
+}
+
+#text{
+  width:70vw;
+}
+
+button{
+  width:10vw;
+}
+
+ul{
+  list-style: none;
+}
+
+ul:nth-child(2){
+  background-color: rgb(229, 229, 229);
+}
+
+#box{
+  height: 90vh;
+  width:60vw;
+  border-right: 2px solid grey;
+}

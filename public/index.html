@@ -23,12 +23,12 @@
             text: text.value
           }
 
+          usernameChosen()
           socket.emit('send', content);
           text.value = ''
         })
 
         text.addEventListener('keydown', (e) =>{
-          // console.log('send typing ', e)
           socket.emit('typing', {username: username.value})
         })
 
@@ -48,7 +48,22 @@
           typing.innerHTML = `${e.username} is typing...`
           timerId = setTimeout((event) => {typing.innerHTML = ''},3000)
         })
+
+        function scrollToBottom(){
+          const box = document.getElementById('box')
+          box.scrollTop = box.scrollHeight
+        }
+
+        function usernameChosen(){
+          if (!username.style.display == "none" && !text.style.width="90vw";){
+            username.style.display= "none"
+            text.style.width="90vw";
+          }
+
+        }
       }
+
+
 
     </script>
 </head>
@@ -63,5 +78,6 @@
     <input type="text" id="username">
     <input type="text" id="text" placeholder="Type Here"><button type="submit" id="send">Send</button>
   </form>
+
 </body>
 </html>
