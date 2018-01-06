@@ -1,13 +1,15 @@
 *{
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 input, button{
-  height: 10vh
+  height: 5vh
 }
 
 #username{
-  width: 20vw;
+  width: 19vw;
 }
 
 #text{
@@ -22,12 +24,20 @@ ul{
   list-style: none;
 }
 
-ul:nth-child(2){
+li:nth-child(odd){
   background-color: rgb(229, 229, 229);
 }
 
 #box{
-  height: 90vh;
+  height: 95vh;
   width:60vw;
   border-right: 2px solid grey;
+  position: relative;
+  white-space: pre-line;
+  word-wrap: break-word;
+  overflow-y: scroll;
 }
+ span{
+  position: absolute;
+  bottom: 0;
+ }

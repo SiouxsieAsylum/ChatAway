@@ -2,7 +2,8 @@
 <html>
 <head>
   <title>Chat Away!</title>
-   <script src="/socket.io/socket.io.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+  <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
       const socket = io();
 
@@ -13,7 +14,7 @@
         const list = document.getElementById('text-append');
         const typing = document.getElementById('typing')
         const timer = 5;
-        const timerId = 1;
+        let timerId = 1;
 
         form.addEventListener('submit', (e)=>{
           e.preventDefault()
@@ -23,9 +24,9 @@
             text: text.value
           }
 
-          usernameChosen()
+          usernameChosen();
           socket.emit('send', content);
-          text.value = ''
+          text.value = '';
         })
 
         text.addEventListener('keydown', (e) =>{
@@ -37,6 +38,7 @@
           let message = document.createElement('li');
           message.innerHTML = text.username + ': ' +  text.text;
           list.appendChild(message)
+          scrollToBottom();
         })
 
         socket.on('typing', (e) => {
@@ -55,12 +57,10 @@
         }
 
         function usernameChosen(){
-          if (!username.style.display == "none" && !text.style.width="90vw";){
             username.style.display= "none"
             text.style.width="90vw";
           }
 
-        }
       }
 
 
@@ -73,7 +73,7 @@
       <ul id="text-append">
 
       </ul>
-      <span id="typing">hi</span>
+      <span id="typing"></span>
     </div>
     <input type="text" id="username">
     <input type="text" id="text" placeholder="Type Here"><button type="submit" id="send">Send</button>

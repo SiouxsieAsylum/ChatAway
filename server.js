@@ -32,7 +32,7 @@ socket.on('connection',function(connection){
 
   connection.on('typing', function(e){
     console.log('recieving ', e)
-    connection.broadcast.emit('typing', e
+    connection.broadcast.emit('typing', e)
     console.log('broadcasting ', e)
   })
 
