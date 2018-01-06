@@ -14,6 +14,9 @@
         const list = document.getElementById('text-append');
         const typing = document.getElementById('typing')
         const users = document.getElementById('client-append')
+        const modalform = document.getElementById('modal-form')
+        const blackout = document.getElementsByClassName('modal-blackout')[0]
+        const chooseUsername = document.getElementById('choose-username')
         const timer = 5;
         let timerId = 1;
 
@@ -34,15 +37,18 @@
           socket.emit('typing', {username: username.value})
         })
 
-        modalform.addEventListener('submit' (e) =>{
-          e.preventDefault()
+        modalform.addEventListener('submit', (e) =>{
+          e.preventDefault();
           socket.emit('usernameChosen', {username: chooseUsername.value})
         })
 
         socket.on('usernameChosen', (event) => {
           let user = document.createElement('li');
           user.innerHTML = event.username;
+          users.appendChild(user)
           username.value = event.username;
+          blackout.style.display = 'none';
+          // need to write a check to see all usernames if possible
         })
 
         socket.on('message', (text) =>{
@@ -86,7 +92,8 @@
   <div class="modal-blackout">
     <div class="modal-content">
       <form id="modal-form">
-
+        <h1>Choose an alias.</h1>
+        <input type="text" id="choose-username" placeholder="Name here">
       </form>
     </div>
   </div>
@@ -100,17 +107,18 @@
       </ul>
       <span id="typing"></span>
     </div>
+    <div id="clientele">
+    <ul id="client-append">
+
+    </ul>
+  </div>
     <div class="input-flex-protect">
       <input type="text" id="username">
       <input type="text" id="text" placeholder="Type Here">
       <button class="send" type="submit" id="send">Send</button>
     </div>
   </form>
-  <div id="clientele">
-    <ul id="client-append">
 
-    </ul>
-  </div>
 
 </body>
 </html>
