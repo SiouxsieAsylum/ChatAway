@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat Away!</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+  <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+      const socket = io();
+
+      window.onload = function(){
+        const form = document.getElementById('form');
+        const username = document.getElementById('username');
+        const text = document.getElementById("text");
+        const list = document.getElementById('text-append');
+        const typing = document.getElementById('typing')
+        const users = document.getElementById('client-append')
+        const timer = 5;
+        let timerId = 1;
+
+        form.addEventListener('submit', (e)=>{
+          e.preventDefault()
+
+          let content = {
+            username: username.value,
+            text: text.value
+          }
+
+          usernameChosen();
+          socket.emit('send', content);
+          text.value = '';
+        })
+
+        text.addEventListener('keydown', (e) =>{
+          socket.emit('typing', {username: username.value})
+        })
+
+        modalform.addEventListener('submit' (e) =>{
+          e.preventDefault()
+          socket.emit('usernameChosen', {username: chooseUsername.value})
+        })
+
+        socket.on('usernameChosen', (event) => {
+          let user = document.createElement('li');
+          user.innerHTML = event.username;
+          username.value = event.username;
+        })
+
+        socket.on('message', (text) =>{
+          console.log(text)
+          // append message to chat
+          let message = document.createElement('li');
+          message.innerHTML = text.username + ': ' +  text.text;
+          list.appendChild(message)
+          scrollToBottom();
+
+        })
+
+        socket.on('typing', (e) => {
+          console.log('typing')
+          if (timerId){
+            clearInterval(timerId)
+          }
+
+          typing.innerHTML = `${e.username} is typing...`
+          timerId = setTimeout((event) => {typing.innerHTML = ''},3000)
+        })
+
+        function scrollToBottom(){
+          const box = document.getElementById('box')
+          box.scrollTop = box.scrollHeight
+        }
+
+        function usernameChosen(){
+            username.style.display= "none"
+            text.style.width="90vw";
+          }
+
+      }
+
+
+
+    </script>
+</head>
+<body>
+  <!-- modal to choose your username -->
+  <div class="modal-blackout">
+    <div class="modal-content">
+      <form id="modal-form">
+
+      </form>
+    </div>
+  </div>
+
+  <form class="container" id="form">
+    <div id="box">
+    <nav>
+    </nav>
+      <ul id="text-append">
+
+      </ul>
+      <span id="typing"></span>
+    </div>
+    <div class="input-flex-protect">
+      <input type="text" id="username">
+      <input type="text" id="text" placeholder="Type Here">
+      <button class="send" type="submit" id="send">Send</button>
+    </div>
+  </form>
+  <div id="clientele">
+    <ul id="client-append">
+
+    </ul>
+  </div>
+
+</body>
+</html>

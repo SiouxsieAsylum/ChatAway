@@ -30,6 +30,12 @@ socket.on('connection',function(connection){
 
   })
 
+  connection.on('usernameChosen', function(e){
+    console.log(e + 'received from choosing username');
+    connection.broadcast.emit('usernameChosen', e);
+    connection.emit('usernameChosen', e);
+  })
+
   connection.on('typing', function(e){
     console.log('recieving ', e)
     connection.broadcast.emit('typing', e)
